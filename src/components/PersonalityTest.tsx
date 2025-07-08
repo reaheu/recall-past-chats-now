@@ -78,7 +78,7 @@ const PersonalityTest = ({ onBack }: PersonalityTestProps) => {
                 key={index}
                 onClick={() => handleAnswer(option.value)}
                 variant="outline"
-                className="w-full p-6 h-auto text-right justify-start border-white/30 text-white bg-transparent hover:bg-blue-500/30 hover:border-blue-400/50 active:bg-blue-600/40 transition-all duration-200"
+                className="w-full p-6 h-auto text-right justify-start border-white/30 text-white bg-transparent hover:bg-blue-500/50 hover:border-blue-400/70 transition-all duration-200"
               >
                 <div className="text-right">
                   <div className="font-semibold mb-1">{option.text}</div>
@@ -87,20 +87,6 @@ const PersonalityTest = ({ onBack }: PersonalityTestProps) => {
             ))}
           </CardContent>
         </Card>
-
-        {/* Question Counter */}
-        <div className="text-center mt-6">
-          <div className="inline-flex space-x-1">
-            {Array.from({ length: Math.min(questions.length, 10) }, (_, i) => (
-              <div
-                key={i}
-                className={`w-2 h-2 rounded-full ${
-                  i <= currentQuestion ? 'bg-white' : 'bg-white/30'
-                }`}
-              />
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );
