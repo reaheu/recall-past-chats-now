@@ -49,34 +49,31 @@ export const calculatePersonalityType = (answers: string[]): PersonalityResult =
   // Sort by score (highest first)
   functionScores.sort((a, b) => b.score - a.score);
 
-  // Get top 4 functions for better analysis
-  const topFunctions = functionScores.slice(0, 4);
-  const dominant = topFunctions[0].name;
-  const auxiliary = topFunctions[1].name;
-  const tertiary = topFunctions[2].name;
-  const inferior = topFunctions[3].name;
+  // Get top functions for analysis
+  const dominant = functionScores[0].name;
+  const auxiliary = functionScores[1].name;
 
-  // Enhanced MBTI type determination with conflict resolution
-  const typeMapping: { [key: string]: { type: string; description: string } } = {
-    // NT combinations
+  // MBTI type determination - always returns a valid 16 personality type
+  const mbtiTypes = {
+    // NT types
     'Te-Ni': { type: 'ENTJ', description: 'القائد الاستراتيجي - يركز على تحقيق الأهداف بكفاءة عالية وله رؤية مستقبلية واضحة' },
     'Ni-Te': { type: 'INTJ', description: 'المهندس المعماري - استراتيجي ومستقل في التفكير مع رؤية طويلة المدى' },
     'Ti-Ne': { type: 'INTP', description: 'المفكر - يحب التحليل العميق واستكشاف الأفكار والنظريات المعقدة' },
     'Ne-Ti': { type: 'ENTP', description: 'المناقش - مبدع ومحب للجدل الفكري والاستكشاف الذهني' },
     
-    // NF combinations
+    // NF types
     'Fe-Ni': { type: 'ENFJ', description: 'المعلم الملهم - يهتم بنمو الآخرين وتطويرهم ولديه حدس قوي حول الناس' },
     'Ni-Fe': { type: 'INFJ', description: 'المحامي - يسعى لفهم الآخرين وتحقيق رؤيته المثالية للعالم' },
     'Fi-Ne': { type: 'INFP', description: 'الوسيط - مثالي ويسعى للأصالة والمعنى في كل ما يفعله' },
     'Ne-Fi': { type: 'ENFP', description: 'الناشط - متحمس ومبدع في العلاقات ولديه طاقة إيجابية معدية' },
     
-    // ST combinations
+    // ST types
     'Te-Si': { type: 'ESTJ', description: 'المدير التنفيذي - منظم وعملي في تحقيق النتائج ويؤمن بالنظام والتقاليد' },
     'Si-Te': { type: 'ISTJ', description: 'اللوجستي - منظم وموثوق في أداء المهام ويحترم الواجبات والالتزامات' },
     'Ti-Se': { type: 'ISTP', description: 'الحرفي - عملي ومرن في حل المشاكل ولديه مهارات تقنية متقدمة' },
     'Se-Ti': { type: 'ESTP', description: 'رجل الأعمال - عملي ومتكيف مع البيئة ولديه قدرة على التعامل مع الأزمات' },
     
-    // SF combinations
+    // SF types
     'Fe-Si': { type: 'ESFJ', description: 'المساعد - يهتم براحة الآخرين ويحافظ على التقاليد والانسجام الاجتماعي' },
     'Si-Fe': { type: 'ISFJ', description: 'المحامي - راعي ومهتم بخدمة الآخرين ولديه ذاكرة قوية للتفاصيل المهمة' },
     'Fi-Se': { type: 'ISFP', description: 'الفنان - حساس ومتكيف مع القيم الشخصية ولديه تقدير عميق للجمال' },
@@ -85,36 +82,38 @@ export const calculatePersonalityType = (answers: string[]): PersonalityResult =
 
   // Try primary combination first
   let typeKey = `${dominant}-${auxiliary}`;
-  let personalityInfo = typeMapping[typeKey];
+  let personalityInfo = mbtiTypes[typeKey as keyof typeof mbtiTypes];
 
   // If not found, try reverse combination
   if (!personalityInfo) {
     typeKey = `${auxiliary}-${dominant}`;
-    personalityInfo = typeMapping[typeKey];
+    personalityInfo = mbtiTypes[typeKey as keyof typeof mbtiTypes];
   }
 
-  // If still not found, use alternative logic based on function families
+  // Fallback logic - determine by dominant function patterns
   if (!personalityInfo) {
-    const thinkingFunctions = ['Te', 'Ti'];
-    const feelingFunctions = ['Fe', 'Fi'];
-    const intuitionFunctions = ['Ne', 'Ni'];
-    const sensingFunctions = ['Se', 'Si'];
-
-    // Check for mixed patterns and resolve conflicts
-    if ((dominant === 'Ne' || auxiliary === 'Ne') && (dominant === 'Fi' || auxiliary === 'Fi')) {
-      personalityInfo = { type: 'ENFP', description: 'الناشط - متحمس ومبدع في العلاقات ولديه طاقة إيجابية معدية' };
-    } else if ((dominant === 'Ne' || auxiliary === 'Ne') && (dominant === 'Ti' || auxiliary === 'Ti')) {
-      personalityInfo = { type: 'ENTP', description: 'المناقش - مبدع ومحب للجدل الفكري والاستكشاف الذهني' };
-    } else if (thinkingFunctions.includes(dominant) && intuitionFunctions.includes(auxiliary)) {
-      personalityInfo = { type: 'NT (مفكر بديهي)', description: 'شخصية تجمع بين التفكير المنطقي والحدس القوي - مبدع في حل المشاكل المعقدة' };
-    } else if (feelingFunctions.includes(dominant) && intuitionFunctions.includes(auxiliary)) {
-      personalityInfo = { type: 'NF (مثالي بديهي)', description: 'شخصية تجمع بين المشاعر والحدس - مهتم بالقيم الإنسانية والإمكانيات' };
-    } else if (thinkingFunctions.includes(dominant) && sensingFunctions.includes(auxiliary)) {
-      personalityInfo = { type: 'ST (مفكر عملي)', description: 'شخصية تجمع بين التفكير المنطقي والواقعية - ممتاز في التطبيق العملي للأفكار' };
-    } else if (feelingFunctions.includes(dominant) && sensingFunctions.includes(auxiliary)) {
-      personalityInfo = { type: 'SF (مهتم عملي)', description: 'شخصية تجمع بين المشاعر والواقعية - ممتاز في خدمة الآخرين بطرق عملية' };
+    const allTypes = Object.values(mbtiTypes);
+    
+    // Assign based on strongest function patterns
+    if (dominant === 'Te' || (dominant === 'Ti' && auxiliary === 'Se')) {
+      personalityInfo = dominant === 'Te' ? 
+        (auxiliary === 'Ni' ? mbtiTypes['Te-Ni'] : mbtiTypes['Te-Si']) :
+        mbtiTypes['Ti-Se'];
+    } else if (dominant === 'Fe' || dominant === 'Fi') {
+      personalityInfo = dominant === 'Fe' ?
+        (auxiliary === 'Ni' ? mbtiTypes['Fe-Ni'] : mbtiTypes['Fe-Si']) :
+        (auxiliary === 'Ne' ? mbtiTypes['Fi-Ne'] : mbtiTypes['Fi-Se']);
+    } else if (dominant === 'Ne') {
+      personalityInfo = auxiliary === 'Ti' ? mbtiTypes['Ne-Ti'] : mbtiTypes['Ne-Fi'];
+    } else if (dominant === 'Ni') {
+      personalityInfo = auxiliary === 'Te' ? mbtiTypes['Ni-Te'] : mbtiTypes['Ni-Fe'];
+    } else if (dominant === 'Se') {
+      personalityInfo = auxiliary === 'Ti' ? mbtiTypes['Se-Ti'] : mbtiTypes['Se-Fi'];
+    } else if (dominant === 'Si') {
+      personalityInfo = auxiliary === 'Te' ? mbtiTypes['Si-Te'] : mbtiTypes['Si-Fe'];
     } else {
-      personalityInfo = { type: 'نمط متوازن', description: 'شخصية متوازنة تجمع بين عدة خصائص بشكل متناغم' };
+      // Final fallback - assign ENFP as default
+      personalityInfo = mbtiTypes['Ne-Fi'];
     }
   }
 

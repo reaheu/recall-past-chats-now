@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import PersonalityTest from "@/components/PersonalityTest";
 import CognitiveFunctions from "@/components/CognitiveFunctions";
-import { Brain, Users, Target, ChevronRight } from "lucide-react";
+import { Brain, Users, Target, ChevronRight, Clock } from "lucide-react";
 
 const Index = () => {
   const [showTest, setShowTest] = useState(false);
@@ -42,6 +42,17 @@ const Index = () => {
               <span className="text-white">8 وظائف إدراكية</span>
             </div>
           </div>
+        </div>
+
+        {/* Coming Soon Notice */}
+        <div className="max-w-md mx-auto mb-8">
+          <Card className="bg-gradient-to-r from-orange-500/20 to-yellow-500/20 backdrop-blur-md border-orange-400/40">
+            <CardContent className="p-4 text-center">
+              <Clock className="w-6 h-6 text-orange-300 mx-auto mb-2" />
+              <h4 className="text-lg font-semibold text-white mb-1">قريباً</h4>
+              <p className="text-gray-100 text-sm">اختبار الإنيجرام التسعة أنماط</p>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Action Cards */}

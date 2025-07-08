@@ -32,7 +32,7 @@ const TestResults = ({ answers, onRestart }: TestResultsProps) => {
         </div>
 
         {/* Main Result */}
-        <Card className="bg-white/10 backdrop-blur-md border-white/20 mb-8">
+        <Card className="bg-white/15 backdrop-blur-md border-white/30 mb-8">
           <CardHeader className="text-center">
             <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
               <Users className="w-10 h-10 text-white" />
@@ -40,21 +40,21 @@ const TestResults = ({ answers, onRestart }: TestResultsProps) => {
             <CardTitle className="text-3xl font-bold text-white mb-2">
               نمطك الشخصي: {result.type}
             </CardTitle>
-            <p className="text-blue-200 text-lg leading-relaxed">{result.description}</p>
+            <p className="text-gray-100 text-lg leading-relaxed">{result.description}</p>
           </CardHeader>
         </Card>
 
         {/* Cognitive Functions */}
-        <Card className="bg-white/10 backdrop-blur-md border-white/20 mb-8">
+        <Card className="bg-white/15 backdrop-blur-md border-white/30 mb-8">
           <CardHeader>
             <CardTitle className="text-white text-center">ترتيب الوظائف الإدراكية الثمانية</CardTitle>
-            <p className="text-blue-200 text-center text-sm">
+            <p className="text-gray-200 text-center text-sm">
               الوظائف مرتبة من الأقوى إلى الأضعف حسب إجاباتك
             </p>
           </CardHeader>
           <CardContent className="space-y-3">
             {result.functions.map((func, index) => (
-              <div key={index} className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10">
+              <div key={index} className="flex items-center justify-between p-4 bg-white/10 rounded-lg border border-white/20">
                 <div className="flex items-center">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-4 ${
                     index < 2 ? 'bg-gradient-to-r from-green-400 to-emerald-500' :
@@ -66,14 +66,14 @@ const TestResults = ({ answers, onRestart }: TestResultsProps) => {
                   </div>
                   <div>
                     <h4 className="text-white font-semibold">{func.name}</h4>
-                    <p className="text-blue-200 text-sm">{func.description}</p>
+                    <p className="text-gray-200 text-sm">{func.description}</p>
                   </div>
                 </div>
                 <div className="text-right">
                   <div className="text-white font-bold text-lg">
                     {func.percentage}%
                   </div>
-                  <div className="text-blue-300 text-xs">
+                  <div className="text-gray-300 text-xs">
                     {func.score} إجابة
                   </div>
                 </div>
@@ -83,13 +83,13 @@ const TestResults = ({ answers, onRestart }: TestResultsProps) => {
         </Card>
 
         {/* Enhanced Warning */}
-        <Card className="bg-amber-500/10 backdrop-blur-md border-amber-400/20 mb-8">
+        <Card className="bg-amber-500/20 backdrop-blur-md border-amber-400/40 mb-8">
           <CardContent className="p-6">
             <div className="flex items-start">
-              <AlertTriangle className="w-6 h-6 text-amber-400 mr-3 mt-1 flex-shrink-0" />
+              <AlertTriangle className="w-6 h-6 text-amber-300 mr-3 mt-1 flex-shrink-0" />
               <div>
-                <h4 className="text-amber-300 font-semibold mb-3">تنبيه مهم حول دقة النتائج</h4>
-                <div className="text-amber-200 text-sm leading-relaxed space-y-2">
+                <h4 className="text-amber-200 font-semibold mb-3">تنبيه مهم حول دقة النتائج</h4>
+                <div className="text-gray-100 text-sm leading-relaxed space-y-2">
                   <p>• هذا الاختبار أداة استكشافية تقدم نظرة عامة على شخصيتك وليس تشخيصاً نهائياً أو علمياً دقيقاً</p>
                   <p>• النتائج قد تتأثر بحالتك المزاجية الحالية، تجاربك الأخيرة، أو فهمك للأسئلة</p>
                   <p>• الأنماط الشخصية أكثر تعقيداً من أي اختبار، والإنسان يمتلك جوانب متعددة من شخصيته</p>
@@ -102,10 +102,10 @@ const TestResults = ({ answers, onRestart }: TestResultsProps) => {
         </Card>
 
         {/* Follow Section */}
-        <Card className="bg-gradient-to-r from-indigo-500/10 to-purple-500/10 backdrop-blur-md border-indigo-400/20">
+        <Card className="bg-gradient-to-r from-indigo-500/20 to-purple-500/20 backdrop-blur-md border-indigo-400/40">
           <CardContent className="p-6 text-center">
             <h4 className="text-xl font-semibold text-white mb-3">🎯 تابعنا لمحتوى متخصص في الأنماط الشخصية</h4>
-            <p className="text-blue-200 mb-4 leading-relaxed">
+            <p className="text-gray-100 mb-4 leading-relaxed">
               نشارك شروحات عميقة للوظائف الإدراكية، تحليلات للأنماط المختلفة، ونصائح عملية 
               لتطبيق هذه المعرفة في الحياة اليومية والعلاقات والعمل
             </p>
@@ -123,7 +123,7 @@ const TestResults = ({ answers, onRestart }: TestResultsProps) => {
                 <ChevronRight className="w-4 h-4 mr-2" />
               </a>
             </Button>
-            <div className="text-blue-300 text-sm">
+            <div className="text-gray-200 text-sm">
               @reatwiy - محتوى متخصص يساعدك على فهم نفسك والآخرين بشكل أفضل
             </div>
           </CardContent>
