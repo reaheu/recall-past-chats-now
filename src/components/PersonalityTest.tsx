@@ -78,7 +78,7 @@ const PersonalityTest = ({ onBack }: PersonalityTestProps) => {
                 key={index}
                 onClick={() => handleAnswer(option.value)}
                 variant="outline"
-                className="w-full p-6 h-auto text-right justify-start border-white/30 text-white bg-transparent hover:bg-blue-500/30 hover:border-blue-400/50 active:bg-blue-600/40 transition-all duration-200"
+                className="w-full p-6 h-auto text-right justify-start border-white/30 text-white hover:bg-white/20 hover:border-white/50 transition-all duration-200"
               >
                 <div className="text-right">
                   <div className="font-semibold mb-1">{option.text}</div>
