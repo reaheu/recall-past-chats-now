@@ -38,7 +38,7 @@ const PersonalityTest = ({ onBack }: PersonalityTestProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 p-4">
       <div className="container mx-auto max-w-4xl">
         {/* Header */}
         <div className="flex items-center mb-8 pt-8">
@@ -62,13 +62,13 @@ const PersonalityTest = ({ onBack }: PersonalityTestProps) => {
             <span>السؤال {currentQuestion + 1} من {questions.length}</span>
             <span>{Math.round(progress)}%</span>
           </div>
-          <Progress value={progress} className="h-3 bg-white/20" />
+          <Progress value={progress} className="h-3 bg-slate-700" />
         </div>
 
         {/* Question Card */}
-        <Card className="bg-white/10 backdrop-blur-md border-white/20">
+        <Card className="bg-slate-800/50 backdrop-blur-md border-slate-600/50">
           <CardHeader>
-            <CardTitle className="text-white text-center text-xl">
+            <CardTitle className="text-white text-center text-xl leading-relaxed">
               {questions[currentQuestion].question}
             </CardTitle>
           </CardHeader>
@@ -78,15 +78,24 @@ const PersonalityTest = ({ onBack }: PersonalityTestProps) => {
                 key={index}
                 onClick={() => handleAnswer(option.value)}
                 variant="outline"
-                className="w-full p-6 h-auto text-right justify-start border-white/30 text-white bg-transparent hover:bg-blue-500/50 hover:border-blue-400/70 transition-all duration-200"
+                className="w-full p-6 h-auto text-right justify-start border-slate-500/70 text-slate-100 bg-slate-700/30 hover:bg-blue-600/80 hover:border-blue-400/80 hover:text-white transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
               >
-                <div className="text-right">
-                  <div className="font-semibold mb-1">{option.text}</div>
+                <div className="text-right w-full">
+                  <div className="font-medium text-base leading-relaxed">{option.text}</div>
                 </div>
               </Button>
             ))}
           </CardContent>
         </Card>
+
+        {/* Progress indicator */}
+        <div className="text-center mt-6">
+          <div className="inline-flex items-center bg-slate-800/50 backdrop-blur-sm rounded-full px-4 py-2">
+            <span className="text-slate-300 text-sm">
+              {currentQuestion + 1}/{questions.length} أسئلة مكتملة
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );

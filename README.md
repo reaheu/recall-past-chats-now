@@ -1,73 +1,148 @@
-# Welcome to your Lovable project
 
-## Project info
+# اختبار الأنماط الشخصية - MBTI Personality Test
 
-**URL**: https://lovable.dev/projects/1c3a2804-b878-4821-8060-0b70ef819671
+موقع لاختبار الأنماط الشخصية مبني على الوظائف الإدراكية الثمانية لتحديد نمط الشخصية حسب مقياس مايرز-بريجز (MBTI).
 
-## How can I edit this code?
+## المميزات
 
-There are several ways of editing your application.
+- ✨ اختبار شامل من 60 سؤال متخصص
+- 🧠 مبني على الوظائف الإدراكية الثمانية
+- 📊 نتائج دقيقة لأنماط MBTI الـ16
+- 🎨 تصميم عصري وجذاب
+- 📱 متجاوب مع جميع الأجهزة
+- 🌙 ألوان داكنة مريحة للعين
 
-**Use Lovable**
+## التقنيات المستخدمة
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/1c3a2804-b878-4821-8060-0b70ef819671) and start prompting.
+- **React 18** - مكتبة واجهة المستخدم
+- **TypeScript** - للكتابة الآمنة
+- **Tailwind CSS** - للتصميم
+- **Vite** - أداة البناء
+- **Shadcn/ui** - مكونات واجهة المستخدم
 
-Changes made via Lovable will be committed automatically to this repo.
+## التشغيل المحلي
 
-**Use your preferred IDE**
+1. **استنسخ المشروع:**
+```bash
+git clone <repository-url>
+cd personality-test
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+2. **ثبت المكتبات:**
+```bash
+npm install
+```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. **شغل المشروع:**
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. **افتح المتصفح:**
+```
+http://localhost:8080
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## البناء للإنتاج
 
-**Use GitHub Codespaces**
+```bash
+npm run build
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## رفع على GitHub Pages
 
-## What technologies are used for this project?
+1. **ثبت gh-pages:**
+```bash
+npm install --save-dev gh-pages
+```
 
-This project is built with:
+2. **أضف للـ package.json:**
+```json
+{
+  "homepage": "https://username.github.io/repository-name",
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  }
+}
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+3. **ارفع:**
+```bash
+npm run deploy
+```
 
-## How can I deploy this project?
+## هيكل المشروع
 
-Simply open [Lovable](https://lovable.dev/projects/1c3a2804-b878-4821-8060-0b70ef819671) and click on Share -> Publish.
+```
+src/
+├── components/
+│   ├── PersonalityTest.tsx    # صفحة الاختبار
+│   ├── TestResults.tsx        # صفحة النتائج
+│   ├── CognitiveFunctions.tsx # صفحة الوظائف الإدراكية
+│   └── ui/                    # مكونات واجهة المستخدم
+├── data/
+│   └── questions.ts           # أسئلة الاختبار
+├── utils/
+│   └── personalityCalculator.ts # حساب نمط الشخصية
+├── pages/
+│   └── Index.tsx              # الصفحة الرئيسية
+└── App.tsx                    # المكون الأساسي
+```
 
-## Can I connect a custom domain to my Lovable project?
+## تخصيص الاختبار
 
-Yes, you can!
+### إضافة أسئلة جديدة
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+عدل ملف `src/data/questions.ts`:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+```typescript
+export const questions = [
+  {
+    question: "السؤال الجديد هنا؟",
+    options: [
+      { text: "الخيار الأول", value: "Te" },
+      { text: "الخيار الثاني", value: "Fi" },
+      // ...
+    ]
+  },
+  // ...
+];
+```
+
+### تعديل خوارزمية النتائج
+
+عدل ملف `src/utils/personalityCalculator.ts` لتخصيص كيفية حساب النمط النهائي.
+
+### تغيير الألوان والتصميم
+
+- عدل `src/index.css` للألوان الأساسية
+- عدل `tailwind.config.ts` للتخصيصات المتقدمة
+
+## المساهمة
+
+1. انسخ المشروع (Fork)
+2. أنشئ فرع جديد (`git checkout -b feature/amazing-feature`)
+3. اعمل التغييرات المطلوبة
+4. ارفع التغييرات (`git commit -m 'Add amazing feature'`)
+5. ادفع للفرع (`git push origin feature/amazing-feature`)
+6. افتح Pull Request
+
+## الترخيص
+
+هذا المشروع مرخص تحت رخصة MIT - راجع ملف [LICENSE](LICENSE) للتفاصيل.
+
+## التواصل
+
+- TikTok: [@reatwiy](https://www.tiktok.com/@reatwiy)
+- لأي استفسارات أو اقتراحات، لا تتردد في فتح Issue
+
+## ملاحظات مهمة
+
+- الاختبار لأغراض التعلم والاستكشاف وليس تشخيصاً علمياً دقيقاً
+- النتائج قد تتأثر بالحالة المزاجية والظروف الشخصية
+- ننصح بمراجعة مختصين لفهم أعمق للشخصية
+
+---
+
+صُنع بـ ❤️ لمساعدة الناس على فهم أنفسهم بشكل أفضل
